@@ -18,7 +18,7 @@ public class EngingContoller {
     @Autowired
     private DeployedServices deployedServices;
 
-    @RequestMapping("/services")
+    @RequestMapping("/listServices")
     public JSONObject serviceDispatcher(HttpServletRequest request){
 
         //返回所有的service
