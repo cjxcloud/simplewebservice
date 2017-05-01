@@ -11,5 +11,25 @@
 
     <artifactId>applicationmanager</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>com.hzau.science</groupId>
+            <artifactId>deployment</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hzau.science</groupId>
+            <artifactId>dataparse</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.hzau.science</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
