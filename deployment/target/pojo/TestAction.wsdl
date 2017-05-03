@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="TestAction" targetNamespace="http://DefaultNamespace" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://DefaultNamespace" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://DefaultNamespace" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://DefaultNamespace">
+  <xsd:element name="add" type="tns:add"/>
+  <xsd:complexType name="add">
+    <xsd:sequence>
+      <xsd:element name="arg0" type="xsd:int"/>
+      <xsd:element name="arg1" type="xsd:int"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="addResponse" type="tns:addResponse"/>
+  <xsd:complexType name="addResponse">
+    <xsd:sequence>
+      <xsd:element name="return" type="xsd:int"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="action" type="tns:action"/>
+  <xsd:complexType name="action">
+    <xsd:sequence/>
+  </xsd:complexType>
+  <xsd:element name="actionResponse" type="tns:actionResponse"/>
+  <xsd:complexType name="actionResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="addResponse">
+    <wsdl:part name="parameters" element="tns:addResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actionResponse">
+    <wsdl:part name="parameters" element="tns:actionResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="add">
+    <wsdl:part name="parameters" element="tns:add">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="action">
+    <wsdl:part name="parameters" element="tns:action">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="TestActionPortType">
+    <wsdl:operation name="add">
+      <wsdl:input name="add" message="tns:add">
+    </wsdl:input>
+      <wsdl:output name="addResponse" message="tns:addResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="action">
+      <wsdl:input name="action" message="tns:action">
+    </wsdl:input>
+      <wsdl:output name="actionResponse" message="tns:actionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TestActionSoapBinding" type="tns:TestActionPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="add">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="add">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="action">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="action">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="actionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TestAction">
+    <wsdl:port name="TestActionPort" binding="tns:TestActionSoapBinding">
+      <soap:address location="http://10.33.45.32/services/TestAction"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

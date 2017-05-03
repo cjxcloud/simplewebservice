@@ -19,5 +19,5 @@ public interface WsdlManageService {
      * @param serviceName
      * @return
      */
-    public List<WsdlObject> getServiceWsdl(String serviceName);
+    public String getServiceWsdl(String serviceName);
 }

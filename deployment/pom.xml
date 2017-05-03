@@ -12,7 +12,13 @@
     <artifactId>deployment</artifactId>
 
 <dependencies>
-</dependencies>
+    <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-tools-java2ws -->
+    <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-tools-java2ws</artifactId>
+        <version>2.7.3</version>
+    </dependency>
 
+</dependencies>
 
 </project>

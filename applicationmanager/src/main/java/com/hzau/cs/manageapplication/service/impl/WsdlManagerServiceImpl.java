@@ -1,7 +1,12 @@
 package com.hzau.cs.manageapplication.service.impl;
 
 import com.hzau.cs.common.bean.wsdlbean.WsdlObject;
+import com.hzau.cs.deployment.service.DeployService;
+import com.hzau.cs.manageapplication.bean.ServiceCenter;
 import com.hzau.cs.manageapplication.service.WsdlManageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +14,11 @@ import java.util.List;
 /**
  * Created by cjx on 2017/5/1.
  */
+@Component
 public class WsdlManagerServiceImpl implements WsdlManageService {
+
+    @Autowired
+    private ServiceCenter serviceCenter;
 
     /**
      * 解析所有的service，生成对应的wsdl
@@ -23,9 +32,14 @@ public class WsdlManagerServiceImpl implements WsdlManageService {
      * @param serviceName
      * @return
      */
-    public List<WsdlObject> getServiceWsdl(String serviceName){
-        List<WsdlObject> wsdlObjectList = new ArrayList<WsdlObject>();
+    public String getServiceWsdl(String serviceName){
+       /* List<String> wsdlObjectList = new ArrayList<String>();
+        List<String> serviceNameList = deployService.getPojoServiceNameAll();
+        System.out.println(wsdlObjectList.toString());
+        String wsdlPath = deployService.getPojoServiceWsdlAll(serviceNameList).get(serviceName);
+        wsdlObjectList .add(wsdlPath);
 
-        return wsdlObjectList;
+        System.out.println(wsdlObjectList.toString());*/
+        return serviceCenter.getServiceWsdlMap().get(serviceName);
     }
 }
