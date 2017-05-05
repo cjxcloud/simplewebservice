@@ -1,4 +1,4 @@
-package com.hzau.science.bean;
+package com.hzau.cs.dataparse.bean;
 
 import java.util.HashMap;
 

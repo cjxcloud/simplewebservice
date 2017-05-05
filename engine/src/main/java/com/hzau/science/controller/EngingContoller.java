@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.OutputStream;
 import java.util.List;
 
 /**
@@ -31,6 +30,7 @@ public class EngingContoller {
 
     @Autowired
     private EnginService enginService;
+
 
     @RequestMapping("/listServices")
     public JSONObject serviceDispatcher(HttpServletRequest request, HttpServletResponse response){
@@ -83,16 +83,15 @@ public class EngingContoller {
             }
             log.info("serviceResolver soapStr={}", wholeStr);
 
+            Document documentRequest = DocumentHelper.parseText(wholeStr);
+            Document documentResponse = enginService.resolveRequest(serviceName, documentRequest);
             response.setContentType("text/xml;charset=utf-8");
             response.setHeader("cache-control", "no-cache");
             XMLWriter w = new XMLWriter(response.getWriter());
-            Document document = DocumentHelper.parseText(wholeStr);
-            w.write(document);
+            w.write(documentResponse);
             w.close();
         }catch (Exception e) {
             log.error("serviceResolver error! Exception={}", e);
         }
-
     }
-
 }

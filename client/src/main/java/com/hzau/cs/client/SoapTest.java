@@ -20,7 +20,7 @@ public class SoapTest {
         parammeter.put("x", 20);
         parammeter.put("y", 3);
         try{
-            String soapResponse = wsClient.invoke("add",parammeter);
+            String soapResponse = wsClient.invoke("add",parammeter, parammeter);
             log.info(soapResponse);
         }catch (Exception e) {
             log.error("Exception = {}", e);

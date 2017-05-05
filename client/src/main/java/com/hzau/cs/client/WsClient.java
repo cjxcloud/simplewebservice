@@ -1,20 +1,14 @@
 package com.hzau.cs.client;
 
-import com.hzau.cs.client.bean.SoapRequest;
-import com.hzau.cs.client.bean.SoapResponse;
-import com.hzau.cs.client.bean.WsdlModel;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -34,12 +28,12 @@ public class WsClient {
         this.namespace = ns;
     }
 
-    public String invoke(String methodName, Map<String, Object> parameterMap) throws IOException {
+    public String invoke(String methodName, Map<String, Object> parameterMap, Map<String, Object> parameterType) throws IOException {
 
         log.info("invoke params: methodName={}, parameterMap={}", methodName, parameterMap);
 
         PostMethod postMethod = new PostMethod(wsdlLocation);
-        String soapRequestData = buildRequestSOAP(methodName,parameterMap);
+        String soapRequestData = buildRequestSOAP(methodName, parameterMap, parameterType);
 
         byte[] bytes = soapRequestData.getBytes("utf-8");
         InputStream inputStream = new ByteArrayInputStream(bytes, 0, bytes.length);
@@ -52,7 +46,7 @@ public class WsClient {
         return  soapResponseData;
     }
 
-    private String buildRequestSOAP(String methodName,Map<String, Object> parameterMap) {
+    private String buildRequestSOAP(String methodName,Map<String, Object> parameterMap, Map<String, Object> parameterTypeMap) {
         StringBuilder soap=new StringBuilder(); //构造请求报文
         soap.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
         soap.append("<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\""
@@ -60,11 +54,11 @@ public class WsClient {
                 + " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">");
         soap.append("<soapenv:Body>");
         soap.append("<" + methodName + " xmlns=\"" + namespace + "\">");
-        soap.append("<" + methodName + " ln>");
+        soap.append("<" + methodName + "ln>");
         Set<String> nameSet = parameterMap.keySet();
         for (String name : nameSet) {
-            soap.append("<" + name + ">" + parameterMap.get(name)
-                    + "</" + name + ">");
+           soap.append("<" + name + ">" + parameterMap.get(name)
+                  + "</" + name + ">");
         }
         soap.append("</" + methodName + "ln>");
         soap.append("</" + methodName + ">");

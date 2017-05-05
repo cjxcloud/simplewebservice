@@ -1,7 +1,8 @@
 package com.hzau.science.service;
 
-import com.hzau.science.bean.WSDLXMLBean;
-import com.hzau.science.bean.BaseResponseXMLObject;
+import com.hzau.cs.dataparse.bean.BaseResponseXMLObject;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
 
 import java.util.List;
 
@@ -25,6 +26,6 @@ public interface EnginService {
      * 处理具体的请求
      */
 
-    public BaseResponseXMLObject resolveRequest(BaseResponseXMLObject baseResponseXMLObject);
+    public Document resolveRequest(String serviceName, Document document) throws DocumentException;
 
 }
