@@ -11,8 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
  * Created by cjx on 2017/5/1.
@@ -50,17 +50,30 @@ public class AppManagerServiceImpl implements AppManagerService {
 
         Object result = null;
         Class<?> cls = (Class<?>) serviceCenter.getServiceCollection().get(baseRequestXMLObject.getServiceName());
+        Map<String, BaseRequestXMLObject.ParamObject> param = baseRequestXMLObject.getParammeter();
         try{
             Object instance = cls.newInstance();
             Method[] methods = cls.getMethods();
-            Method method = cls.getMethod("add",int.class, int.class);
+            Method method = null;
+            if (param.isEmpty()){
+                method = cls.getMethod(baseRequestXMLObject.getMethodName());
+                result = method.invoke(instance);
+            }else if (param.get("arg1").getType().equals("int")){
 
-            result = method.invoke(instance, 20, 3);
+                method = cls.getMethod(baseRequestXMLObject.getMethodName(),int.class, int.class);
+
+                result = method.invoke(instance, Integer.parseInt(param.get("arg1").getValue().toString()), Integer.parseInt(param.get("arg2").getValue().toString()));
+
+            }else if (param.get("arg1").getType().equals("String")){
+
+                method = cls.getMethod(baseRequestXMLObject.getMethodName(),String.class);
+                result = method.invoke(instance, param.get("arg1").getValue());
+            }
             log.info("invokeAddService result={}",result);
         }catch (Exception e){
             log.error("Exception={}", e);
         }
-        log.info("invokeService serviceName={], object={}", baseRequestXMLObject.getServiceName(), cls);
+        log.info("invokeService serviceName={}, object={}", baseRequestXMLObject.getServiceName(), cls);
         return result;
     }
 

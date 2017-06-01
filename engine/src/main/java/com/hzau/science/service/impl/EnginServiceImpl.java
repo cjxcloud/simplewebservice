@@ -2,6 +2,7 @@ package com.hzau.science.service.impl;
 
 import com.hzau.cs.dataparse.bean.BaseRequestXMLObject;
 import com.hzau.cs.deployment.service.DeployService;
+import com.hzau.cs.manageapplication.service.AppDeployedService;
 import com.hzau.cs.manageapplication.service.AppManagerService;
 import com.hzau.cs.manageapplication.service.WsdlManageService;
 import com.hzau.science.service.EnginService;
@@ -24,14 +25,14 @@ public class EnginServiceImpl implements EnginService {
     private AppManagerService appManagerService;
 
     @Autowired
-    private DeployService deployService;
+    private AppDeployedService appDeployedService;
 
     /**
      * 列举出所有的service
      */
     public List<String> getAllDeployedServices(){
 
-        List<String> serviceNameList = deployService.getPojoServiceNameAll();
+        List<String> serviceNameList = appDeployedService.getDeployedServices();
         return serviceNameList;
     }
 

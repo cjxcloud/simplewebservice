@@ -14,7 +14,8 @@
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 
     <bean id="serviceCenter" class="com.hzau.cs.manageapplication.bean.ServiceCenter">
-
+        <property name="pojoPath" value="${deployPath}"/>
+        <property name="ip" value="${ip}"/>
     </bean>
 
 </beans>

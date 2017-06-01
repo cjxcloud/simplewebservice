@@ -1,15 +1,9 @@
 package com.hzau.cs.manageapplication.service.impl;
 
-import com.hzau.cs.common.bean.wsdlbean.WsdlObject;
-import com.hzau.cs.deployment.service.DeployService;
 import com.hzau.cs.manageapplication.bean.ServiceCenter;
 import com.hzau.cs.manageapplication.service.WsdlManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by cjx on 2017/5/1.

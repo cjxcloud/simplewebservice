@@ -6,8 +6,6 @@ import com.hzau.cs.deployment.util.ClassLoaderUtil;
 import com.hzau.cs.deployment.util.ClassToWsdlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +28,8 @@ public class DeployServiceImpl implements DeployService {
      * 启动时加载部署所有的POJO形式的service
      * @return map
      */
-    public Map<String, Object> getPojoServiceAll(List<String> serviceNameList){
-        Map<String, Object> serviceMap = classLoaderUtil.getServiceList("E:/test",serviceNameList);
+    public Map<String, Object> getPojoServiceAll(String pojoPath, String ip, List<String> serviceNameList){
+        Map<String, Object> serviceMap = classLoaderUtil.getServiceList(pojoPath, ip, serviceNameList);
         return serviceMap;
     }
 
@@ -39,8 +37,8 @@ public class DeployServiceImpl implements DeployService {
      * 启动时加载部署所有的POJO形式的serviceName
      * @return
      */
-    public List<String> getPojoServiceNameAll(){
-        List<String> serviceNameList = classFileUtil.getClassNameList("E:/test");
+    public List<String> getPojoServiceNameAll(String pojoPath){
+        List<String> serviceNameList = classFileUtil.getClassNameList(pojoPath);
 
         return serviceNameList;
     }
@@ -50,8 +48,8 @@ public class DeployServiceImpl implements DeployService {
      * @param serviceNameList
      * @return
      */
-    public Map<String, String> getPojoServiceWsdlAll(List<String> serviceNameList){
-        Map<String, String> wsdlMap =classToWsdlUtil.parseClassToWsdlFile("E:/test",serviceNameList);
+    public Map<String, String> getPojoServiceWsdlAll(String pojoPath, List<String> serviceNameList){
+        Map<String, String> wsdlMap =classToWsdlUtil.parseClassToWsdlFile(pojoPath,serviceNameList);
 
         return  wsdlMap;
     }

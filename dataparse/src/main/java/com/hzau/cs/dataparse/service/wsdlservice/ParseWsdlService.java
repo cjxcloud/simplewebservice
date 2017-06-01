@@ -1,7 +1,7 @@
 package com.hzau.cs.dataparse.service.wsdlservice;
 
-import com.hzau.cs.common.bean.wsdlbean.WsdlObject;
-import com.hzau.cs.common.bean.wsdlbean.WsdlResponseObject;
+import com.hzau.cs.dataparse.bean.BaseRequestXMLObject;
+import com.hzau.cs.dataparse.bean.WSDLXMLBean;
 
 /**
  * Created by cjx on 2017/5/1.
@@ -13,12 +13,12 @@ public interface ParseWsdlService {
      * @param serviceObject
      * @return
      */
-    public WsdlObject parseServiceIntoWsdlObject(Object serviceObject);
+    public WSDLXMLBean parseServiceIntoWsdlObject(Object serviceObject);
 
     /**
      * 解析WSDL结果，生成对应的WSDL响应对象
      * @param wsdlObject
      * @return
      */
-    public WsdlResponseObject parseIntoResponseObject(WsdlObject wsdlObject);
+    public BaseRequestXMLObject parseIntoResponseObject(WSDLXMLBean wsdlObject);
 }

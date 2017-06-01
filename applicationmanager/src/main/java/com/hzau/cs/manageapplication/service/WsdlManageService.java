@@ -1,9 +1,5 @@
 package com.hzau.cs.manageapplication.service;
 
-import com.hzau.cs.common.bean.wsdlbean.WsdlObject;
-
-import java.util.List;
-
 /**
  * Created by cjx on 2017/5/1.
  */

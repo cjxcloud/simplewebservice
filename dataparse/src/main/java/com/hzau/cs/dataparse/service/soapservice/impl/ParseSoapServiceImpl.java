@@ -47,7 +47,6 @@ public class ParseSoapServiceImpl implements ParseSoapService {
     private BaseRequestXMLObject listNodes(Element node){
         BaseRequestXMLObject baseRequestXMLObject = new BaseRequestXMLObject();
         Map<String, BaseRequestXMLObject.ParamObject> param = new HashMap<String, BaseRequestXMLObject.ParamObject>();
-        ParamObject paramObject = new ParamObject();
         System.out.println("当前节点的名称：" + node.getName());
 
         Iterator<Element> iteratorEnvelope = node.elementIterator();
@@ -59,15 +58,31 @@ public class ParseSoapServiceImpl implements ParseSoapService {
         Element eMethodln = iteratorMethod.next();
         Iterator<Element> iteratorMethodln = eMethodln.elementIterator();
         while(iteratorMethodln.hasNext()){
+            ParamObject paramObject = new ParamObject();
             Element eParam = iteratorMethodln.next();
             System.out.println("Data: "+eParam.getData()+"; Namespace: "+ eParam.getNamespace()+"; QName: "+eParam.getQName());
             if (!(eParam.getTextTrim().equals(""))) {
                 paramObject.setValue(eParam.getText());
+
+                if (isNumeric(eParam.getText())){
+                    paramObject.setType("int");
+                }else{
+                    paramObject.setType("String");
+                }
                 param.put(eParam.getName(), paramObject);
             }
         }
         baseRequestXMLObject.setParammeter(param);
         return baseRequestXMLObject;
+    }
+
+    public boolean isNumeric(String str){
+        for (int i = 0; i < str.length(); i++){
+            if (!Character.isDigit(str.charAt(i))){
+                return false;
+            }
+        }
+        return true;
     }
 
 }

@@ -22,6 +22,8 @@ public class ServiceCenter implements InitializingBean{
 
     public String pojoPath;
 
+    public String ip;
+
     public Map<String, Object> serviceCollection = null;
 
     public List<String> serviceNameLsit = null;
@@ -60,12 +62,18 @@ public class ServiceCenter implements InitializingBean{
         this.serviceWsdlMap = serviceWsdlMap;
     }
 
+    public String getIp() {
+        return ip;
+    }
 
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
     @Override
     public void afterPropertiesSet() throws Exception {
-        serviceNameLsit = deployService.getPojoServiceNameAll();
-        serviceWsdlMap = deployService.getPojoServiceWsdlAll(serviceNameLsit);
-        serviceCollection = deployService.getPojoServiceAll(serviceNameLsit);
+        serviceNameLsit = deployService.getPojoServiceNameAll(pojoPath);
+        serviceWsdlMap = deployService.getPojoServiceWsdlAll(pojoPath, serviceNameLsit);
+        serviceCollection = deployService.getPojoServiceAll(pojoPath, ip, serviceNameLsit);
         log.info("deployed service success. the services list={}", serviceNameLsit);
     }
 }

@@ -11,18 +11,18 @@ public interface DeployService {
      * 启动时加载部署所有的POJO形式的service
      * @return map
      */
-    public Map<String, Object> getPojoServiceAll(List<String> serviceNameList);
+    public Map<String, Object> getPojoServiceAll(String pojoPath, String ip, List<String> serviceNameList);
 
     /**
      * 启动时加载部署所有的POJO形式的serviceName
      * @return
      */
-    public List<String> getPojoServiceNameAll();
+    public List<String> getPojoServiceNameAll(String pojoPath);
 
     /**
      * 启动时加载部署所有的POJO形式的serviceWsdl
      * @param serviceNameList
      * @return
      */
-    public Map<String, String> getPojoServiceWsdlAll(List<String> serviceNameList);
+    public Map<String, String> getPojoServiceWsdlAll(String pojoPath, List<String> serviceNameList);
 }

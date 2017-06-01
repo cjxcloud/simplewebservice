@@ -1,7 +1,7 @@
 package com.hzau.cs.dataparse.service.wsdlservice.impl;
 
-import com.hzau.cs.common.bean.wsdlbean.WsdlObject;
-import com.hzau.cs.common.bean.wsdlbean.WsdlResponseObject;
+import com.hzau.cs.dataparse.bean.BaseRequestXMLObject;
+import com.hzau.cs.dataparse.bean.WSDLXMLBean;
 import com.hzau.cs.dataparse.service.wsdlservice.ParseWsdlService;
 
 /**
@@ -14,8 +14,8 @@ public class ParseWsdlServiceImpl implements ParseWsdlService {
      * @param serviceObject
      * @return
      */
-    public WsdlObject parseServiceIntoWsdlObject(Object serviceObject){
-        WsdlObject wsdlObject = new WsdlObject();
+    public WSDLXMLBean parseServiceIntoWsdlObject(Object serviceObject){
+        WSDLXMLBean wsdlObject = new WSDLXMLBean();
 
         return  wsdlObject;
     }
@@ -25,8 +25,8 @@ public class ParseWsdlServiceImpl implements ParseWsdlService {
      * @param wsdlObject
      * @return
      */
-    public WsdlResponseObject parseIntoResponseObject(WsdlObject wsdlObject){
-        WsdlResponseObject wsdlResponseObject = new WsdlResponseObject();
+    public BaseRequestXMLObject parseIntoResponseObject(WSDLXMLBean wsdlObject){
+        BaseRequestXMLObject wsdlResponseObject = new BaseRequestXMLObject();
 
         return  wsdlResponseObject;
     }

@@ -19,18 +19,17 @@ import java.util.Map;
 @Component
 public class ClassLoaderUtil {
 
-    public Map<String, Object> getServiceList(String path, List<String> serviceClassNameList) {
+    public Map<String, Object> getServiceList(String path, String ip, List<String> serviceClassNameList) {
         Map<String, Object> serviceList = new HashMap<String, Object>();
-
         try{
             File file =new File(path);
             URL url = file.toURI().toURL();
             ClassLoader loader=new URLClassLoader(new URL[]{url});//创建类加载器
             for (String name: serviceClassNameList){
-                System.out.println(name);
                 Class<?> cls=loader.loadClass(name);//加载指定类，注意一定要带上类的包名
                 Method[] methods = cls.getMethods();
                 //Object obj=cls.newInstance();//初始化一个实例
+                JavaToWS.main(new String[] { "-d", path.toString(), "-cp", path.toString(),"-o", name+".wsdl","-servicename",name,"-address","http://"+ip+"/services/"+name ,"-wsdl", name });
                 serviceList.put(name,cls);
             }
         }catch (Exception e){
@@ -62,7 +61,7 @@ public class ClassLoaderUtil {
         List<String> classNameList = new ArrayList<String>();
         classNameList.add("TestAction");
         classNameList.add("TestMain");
-        Map<String, Object> serviceMap = new ClassLoaderUtil().getServiceList("E:\\test", classNameList);
+        Map<String, Object> serviceMap = new ClassLoaderUtil().getServiceList("E:\\test", null,classNameList);
 
         System.out.println(serviceMap.toString());
         String rootPath=new ClassLoaderUtil().getCurrentPath();
