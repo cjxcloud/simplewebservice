@@ -29,7 +29,7 @@ public class ClassLoaderUtil {
                 Class<?> cls=loader.loadClass(name);//加载指定类，注意一定要带上类的包名
                 Method[] methods = cls.getMethods();
                 //Object obj=cls.newInstance();//初始化一个实例
-                JavaToWS.main(new String[] { "-d", path.toString(), "-cp", path.toString(),"-o", name+".wsdl","-servicename",name,"-address","http://"+ip+"/services/"+name ,"-wsdl", name });
+                JavaToWS.main(new String[] { "-d", path.toString(), "-cp", path.toString(),"-o", name+".wsdl","-servicename",name,"-address","http://"+ip+":8080/WsCloud/services/"+name ,"-wsdl", name });
                 serviceList.put(name,cls);
             }
         }catch (Exception e){
